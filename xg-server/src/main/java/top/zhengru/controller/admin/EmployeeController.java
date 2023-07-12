@@ -1,20 +1,20 @@
 package top.zhengru.controller.admin;
 
+import io.swagger.annotations.ApiOperation;
+import org.springframework.web.bind.annotation.*;
 import top.zhengru.constant.JwtClaimsConstant;
 import top.zhengru.dto.EmployeeDTO;
 import top.zhengru.dto.EmployeeLoginDTO;
+import top.zhengru.dto.EmployeePageQueryDTO;
 import top.zhengru.entity.Employee;
 import top.zhengru.properties.JwtProperties;
+import top.zhengru.result.PageResult;
 import top.zhengru.result.Result;
 import top.zhengru.service.EmployeeService;
 import top.zhengru.utils.JwtUtil;
 import top.zhengru.vo.EmployeeLoginVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -39,6 +39,7 @@ public class EmployeeController {
      * @return
      */
     @PostMapping("/login")
+    @ApiOperation("登录")
     public Result<EmployeeLoginVO> login(@RequestBody EmployeeLoginDTO employeeLoginDTO) {
         log.info("员工登录：{}", employeeLoginDTO);
 
@@ -68,6 +69,7 @@ public class EmployeeController {
      * @return
      */
     @PostMapping("/logout")
+    @ApiOperation("退出登录")
     public Result<String> logout() {
         return Result.success();
     }
@@ -78,8 +80,21 @@ public class EmployeeController {
      * @return
      */
     @PostMapping("/")
+    @ApiOperation("新增员工")
     public Result<String> addEmployee(@RequestBody EmployeeDTO employeeDTO) {
         return employeeService.addEmployee(employeeDTO);
+    }
+
+    /**
+     * 员工分页查询
+     * @param employeePageQueryDTO
+     * @return
+     */
+    @GetMapping("/page")
+    @ApiOperation("员工分页查询")
+    public Result<PageResult> page(EmployeePageQueryDTO employeePageQueryDTO) {
+        PageResult pageResult = employeeService.pageQuery(employeePageQueryDTO);
+        return Result.success(pageResult);
     }
 
 }

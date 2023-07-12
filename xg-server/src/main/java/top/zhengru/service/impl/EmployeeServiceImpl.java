@@ -1,5 +1,7 @@
 package top.zhengru.service.impl;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.util.DigestUtils;
 import top.zhengru.constant.MessageConstant;
@@ -8,11 +10,13 @@ import top.zhengru.constant.StatusConstant;
 import top.zhengru.context.BaseContext;
 import top.zhengru.dto.EmployeeDTO;
 import top.zhengru.dto.EmployeeLoginDTO;
+import top.zhengru.dto.EmployeePageQueryDTO;
 import top.zhengru.entity.Employee;
 import top.zhengru.exception.AccountLockedException;
 import top.zhengru.exception.AccountNotFoundException;
 import top.zhengru.exception.PasswordErrorException;
 import top.zhengru.mapper.EmployeeMapper;
+import top.zhengru.result.PageResult;
 import top.zhengru.result.Result;
 import top.zhengru.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,6 +85,20 @@ public class EmployeeServiceImpl implements EmployeeService {
             return Result.success();
         }
         return Result.error("添加失败");
+    }
+
+    /**
+     * 员工分页查询
+     * @param employeePageQueryDTO
+     * @return
+     */
+    @Override
+    public PageResult pageQuery(EmployeePageQueryDTO employeePageQueryDTO) {
+        Page<Employee> page = employeeMapper.pageQuery(employeePageQueryDTO);
+        long total = page.getTotal();
+        PageHelper.startPage(employeePageQueryDTO.getPage(), employeePageQueryDTO.getPageSize());
+        Page<Employee> resultList = employeeMapper.pageQuery(employeePageQueryDTO);
+        return new PageResult(total, resultList);
     }
 
 }
