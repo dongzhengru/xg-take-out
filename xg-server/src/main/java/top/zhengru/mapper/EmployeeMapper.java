@@ -2,10 +2,12 @@ package top.zhengru.mapper;
 
 import com.github.pagehelper.Page;
 import org.apache.ibatis.annotations.Insert;
+import top.zhengru.annotation.AutoFill;
 import top.zhengru.dto.EmployeePageQueryDTO;
 import top.zhengru.entity.Employee;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import top.zhengru.enumeration.OperationType;
 
 @Mapper
 public interface EmployeeMapper {
@@ -25,6 +27,7 @@ public interface EmployeeMapper {
      */
     @Insert("insert into employee (name, username, password, phone, sex, id_number, create_time, update_time, create_user, update_user)" +
             "value (#{name},#{username},#{password},#{phone},#{sex},#{idNumber},#{createTime},#{updateTime},#{createUser},#{updateUser})")
+    @AutoFill(value = OperationType.INSERT)
     Integer addEmployee(Employee employee);
 
     /**
@@ -40,6 +43,7 @@ public interface EmployeeMapper {
      * 编辑员工信息
      * @param employee
      */
+    @AutoFill(value = OperationType.UPDATE)
     void update(Employee employee);
 
     /**
