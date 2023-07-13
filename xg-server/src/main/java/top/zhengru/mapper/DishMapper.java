@@ -1,7 +1,11 @@
 package top.zhengru.mapper;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import top.zhengru.annotation.AutoFill;
+import top.zhengru.entity.Dish;
+import top.zhengru.enumeration.OperationType;
 
 @Mapper
 public interface DishMapper {
@@ -14,4 +18,10 @@ public interface DishMapper {
     @Select("select count(id) from dish where category_id = #{categoryId}")
     Integer countByCategoryId(Long categoryId);
 
+    /**
+     * 新增菜品
+     * @param dish
+     */
+    @AutoFill(OperationType.INSERT)
+    void addDish(Dish dish);
 }
