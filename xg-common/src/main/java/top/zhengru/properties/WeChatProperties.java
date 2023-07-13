@@ -6,7 +6,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 @Component
-@ConfigurationProperties(prefix = "sky.wechat")
+@ConfigurationProperties(prefix = "xg.wechat")
 @Data
 public class WeChatProperties {
 

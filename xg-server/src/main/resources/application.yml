@@ -37,3 +37,8 @@ xg:
     admin-ttl: 7200000
     # 设置前端传递过来的令牌名称
     admin-token-name: token
+  alioss:
+    access-key-id: ${xg.alioss.access-key-id}
+    access-key-secret: ${xg.alioss.access-key-secret}
+    bucket-name: ${xg.alioss.bucket-name}
+    endpoint: ${xg.alioss.endpoint}

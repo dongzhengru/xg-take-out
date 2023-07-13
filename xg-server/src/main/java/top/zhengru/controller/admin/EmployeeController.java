@@ -1,5 +1,6 @@
 package top.zhengru.controller.admin;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 import top.zhengru.constant.JwtClaimsConstant;
@@ -24,6 +25,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/admin/employee")
+@Api(tags = "员工相关接口")
 @Slf4j
 public class EmployeeController {
 
