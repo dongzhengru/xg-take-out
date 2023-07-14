@@ -1,17 +1,25 @@
 package top.zhengru.service.impl;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
+import top.zhengru.constant.MessageConstant;
+import top.zhengru.constant.StatusConstant;
 import top.zhengru.dto.SetmealDTO;
+import top.zhengru.dto.SetmealPageQueryDTO;
 import top.zhengru.entity.Setmeal;
 import top.zhengru.entity.SetmealDish;
+import top.zhengru.exception.DeletionNotAllowedException;
 import top.zhengru.mapper.SetmealDishMapper;
 import top.zhengru.mapper.SetmealMapper;
+import top.zhengru.result.PageResult;
 import top.zhengru.service.SetMealService;
+import top.zhengru.vo.SetmealVO;
 
 import java.util.List;
 
@@ -43,6 +51,71 @@ public class SetMealServiceImpl implements SetMealService {
         setmealDishes.forEach(setmealDish -> {
             setmealDish.setSetmealId(id);
         });
+        setmealDishMapper.insertBatch(setmealDishes);
+    }
+
+    /**
+     * 套餐分页查询
+     * @param setmealPageQueryDTO
+     * @return
+     */
+    @Override
+    public PageResult pageQuery(SetmealPageQueryDTO setmealPageQueryDTO) {
+        Setmeal setmeal = new Setmeal();
+        BeanUtils.copyProperties(setmealPageQueryDTO,setmeal);
+        PageHelper.startPage(setmealPageQueryDTO.getPage(),setmealPageQueryDTO.getPageSize());
+        Page<SetmealVO> page = setmealMapper.pageQuery(setmeal);
+        return new PageResult(page.getTotal(),page);
+    }
+
+    /**
+     * 批量删除套餐
+     * @param ids
+     */
+    @Override
+    @Transactional
+    public void deleteBatch(List<Long> ids) {
+        ids.forEach(id -> {
+            Setmeal setmeal = setmealMapper.getById(id);
+            if(StatusConstant.ENABLE == setmeal.getStatus()){
+                throw new DeletionNotAllowedException(MessageConstant.SETMEAL_ON_SALE);
+            }
+        });
+        ids.forEach(setmealId -> {
+            setmealMapper.deleteById(setmealId);
+            setmealDishMapper.deleteBySetmealId(setmealId);
+        });
+    }
+
+    /**
+     * 根据id查询套餐
+     * @param id
+     * @return
+     */
+    @Override
+    public SetmealVO getByIdWithDish(Long id) {
+        Setmeal setmeal = setmealMapper.getById(id);
+        List<SetmealDish> setmealDishes = setmealDishMapper.getBySetmealId(id);
+        SetmealVO setmealVO = new SetmealVO();
+        BeanUtils.copyProperties(setmeal, setmealVO);
+        setmealVO.setSetmealDishes(setmealDishes);
+        return setmealVO;
+    }
+
+    /**
+     * 修改套餐
+     * @param setmealDTO
+     */
+    @Override
+    @Transactional
+    public void update(SetmealDTO setmealDTO) {
+        Setmeal setmeal = new Setmeal();
+        BeanUtils.copyProperties(setmealDTO, setmeal);
+        setmealMapper.update(setmeal);
+        Long setmealId = setmealDTO.getId();
+        setmealDishMapper.deleteBySetmealId(setmealId);
+        List<SetmealDish> setmealDishes = setmealDTO.getSetmealDishes();
+        setmealDishes.forEach(setmealDish -> setmealDish.setSetmealId(setmealId));
         setmealDishMapper.insertBatch(setmealDishes);
     }
 
