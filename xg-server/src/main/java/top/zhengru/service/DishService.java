@@ -4,6 +4,8 @@ import top.zhengru.dto.DishDTO;
 import top.zhengru.dto.DishPageQueryDTO;
 import top.zhengru.result.PageResult;
 
+import java.util.List;
+
 /**
  * @Author: dongzhengru
  * @Blog: zhengru.top
@@ -23,4 +25,10 @@ public interface DishService {
      * @return
      */
     PageResult pageQuery(DishPageQueryDTO dishPageQueryDTO);
+
+    /**
+     * 批量删除菜品
+     * @param ids
+     */
+    void deleteBatch(List<Long> ids);
 }

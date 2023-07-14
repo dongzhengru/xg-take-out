@@ -12,6 +12,8 @@ import top.zhengru.result.Result;
 import top.zhengru.service.DishService;
 import top.zhengru.service.impl.DishServiceImpl;
 
+import java.util.List;
+
 /**
  * @Author: dongzhengru
  * @Blog: zhengru.top
@@ -48,5 +50,17 @@ public class DishController {
     public Result<PageResult> page(DishPageQueryDTO dishPageQueryDTO) {
         PageResult pageResult = dishService.pageQuery(dishPageQueryDTO);
         return Result.success(pageResult);
+    }
+
+    /**
+     * 批量删除菜品
+     * @param ids
+     * @return
+     */
+    @DeleteMapping
+    @ApiOperation("批量删除菜品")
+    public Result<String> delete(@RequestParam List<Long> ids) {
+        dishService.deleteBatch(ids);
+        return Result.success();
     }
 }
