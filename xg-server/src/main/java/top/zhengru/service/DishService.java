@@ -1,6 +1,8 @@
 package top.zhengru.service;
 
 import top.zhengru.dto.DishDTO;
+import top.zhengru.dto.DishPageQueryDTO;
+import top.zhengru.result.PageResult;
 
 /**
  * @Author: dongzhengru
@@ -14,4 +16,11 @@ public interface DishService {
      * @param dishDTO
      */
     void addDish(DishDTO dishDTO);
+
+    /**
+     * 菜品分页查询
+     * @param dishPageQueryDTO
+     * @return
+     */
+    PageResult pageQuery(DishPageQueryDTO dishPageQueryDTO);
 }

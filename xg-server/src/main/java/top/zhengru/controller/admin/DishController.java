@@ -4,12 +4,12 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import top.zhengru.dto.DishDTO;
+import top.zhengru.dto.DishPageQueryDTO;
+import top.zhengru.result.PageResult;
 import top.zhengru.result.Result;
+import top.zhengru.service.DishService;
 import top.zhengru.service.impl.DishServiceImpl;
 
 /**
@@ -24,7 +24,7 @@ import top.zhengru.service.impl.DishServiceImpl;
 @Slf4j
 public class DishController {
     @Autowired
-    DishServiceImpl dishService;
+    DishService dishService;
 
     /**
      * 新增菜品
@@ -36,5 +36,17 @@ public class DishController {
     public Result<String> addDish(@RequestBody DishDTO dishDTO) {
         dishService.addDish(dishDTO);
         return Result.success();
+    }
+
+    /**
+     * 菜品分页查询
+     * @param dishPageQueryDTO
+     * @return
+     */
+    @GetMapping("/page")
+    @ApiOperation("菜品分页查询")
+    public Result<PageResult> page(DishPageQueryDTO dishPageQueryDTO) {
+        PageResult pageResult = dishService.pageQuery(dishPageQueryDTO);
+        return Result.success(pageResult);
     }
 }
