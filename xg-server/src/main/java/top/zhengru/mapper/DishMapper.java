@@ -1,10 +1,7 @@
 package top.zhengru.mapper;
 
 import com.github.pagehelper.Page;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import top.zhengru.annotation.AutoFill;
 import top.zhengru.dto.DishPageQueryDTO;
 import top.zhengru.entity.Dish;
@@ -57,4 +54,5 @@ public interface DishMapper {
      */
     @AutoFill(value = OperationType.UPDATE)
     void update(Dish dish);
+
 }
