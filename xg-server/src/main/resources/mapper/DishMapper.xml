@@ -37,4 +37,7 @@
         </if>
         order by d.create_time desc
     </select>
+    <select id="list" resultType="top.zhengru.entity.Dish">
+        select * from dish where category_id = #{categoryId} and status = #{status}
+    </select>
 </mapper>

@@ -8,6 +8,8 @@ import top.zhengru.entity.Dish;
 import top.zhengru.enumeration.OperationType;
 import top.zhengru.vo.DishVO;
 
+import java.util.List;
+
 @Mapper
 public interface DishMapper {
 
@@ -55,4 +57,10 @@ public interface DishMapper {
     @AutoFill(value = OperationType.UPDATE)
     void update(Dish dish);
 
+    /**
+     * 根据分类id查询菜品
+     * @param dish
+     * @return
+     */
+    List<Dish> list(Dish dish);
 }

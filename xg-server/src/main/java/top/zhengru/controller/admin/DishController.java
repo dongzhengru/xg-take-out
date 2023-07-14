@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import top.zhengru.dto.DishDTO;
 import top.zhengru.dto.DishPageQueryDTO;
+import top.zhengru.entity.Dish;
 import top.zhengru.result.PageResult;
 import top.zhengru.result.Result;
 import top.zhengru.service.DishService;
@@ -98,5 +99,17 @@ public class DishController {
     public Result<String> status(@PathVariable Integer status, Long id) {
         dishService.status(status, id);
         return Result.success();
+    }
+
+    /**
+     * 根据分类id查询菜品
+     * @param categoryId
+     * @return
+     */
+    @GetMapping("/list")
+    @ApiOperation("根据分类id查询菜品")
+    public Result<List<Dish>> list(Long categoryId) {
+        List<Dish> list = dishService.list(categoryId);
+        return Result.success(list);
     }
 }

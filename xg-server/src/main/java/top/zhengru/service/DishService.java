@@ -2,6 +2,7 @@ package top.zhengru.service;
 
 import top.zhengru.dto.DishDTO;
 import top.zhengru.dto.DishPageQueryDTO;
+import top.zhengru.entity.Dish;
 import top.zhengru.result.PageResult;
 import top.zhengru.vo.DishVO;
 
@@ -53,4 +54,11 @@ public interface DishService {
      * @param id
      */
     void status(Integer status, Long id);
+
+    /**
+     * 根据分类id查询菜品
+     * @param categoryId
+     * @return
+     */
+    List<Dish> list(Long categoryId);
 }
