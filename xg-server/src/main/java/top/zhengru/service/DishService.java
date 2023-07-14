@@ -3,6 +3,7 @@ package top.zhengru.service;
 import top.zhengru.dto.DishDTO;
 import top.zhengru.dto.DishPageQueryDTO;
 import top.zhengru.result.PageResult;
+import top.zhengru.vo.DishVO;
 
 import java.util.List;
 
@@ -31,4 +32,18 @@ public interface DishService {
      * @param ids
      */
     void deleteBatch(List<Long> ids);
+
+    /**
+     * 根据id查询菜品和关联的口味数据
+     * @param id
+     * @return
+     */
+    DishVO getByIdWithFlavor(Long id);
+
+    /**
+     * 编辑菜品
+     * @param dishDTO
+     */
+    void update(DishDTO dishDTO);
+
 }

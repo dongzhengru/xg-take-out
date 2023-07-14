@@ -11,6 +11,7 @@ import top.zhengru.result.PageResult;
 import top.zhengru.result.Result;
 import top.zhengru.service.DishService;
 import top.zhengru.service.impl.DishServiceImpl;
+import top.zhengru.vo.DishVO;
 
 import java.util.List;
 
@@ -61,6 +62,29 @@ public class DishController {
     @ApiOperation("批量删除菜品")
     public Result<String> delete(@RequestParam List<Long> ids) {
         dishService.deleteBatch(ids);
+        return Result.success();
+    }
+
+    /**
+     * 根据id查询菜品和关联的口味数据
+     * @param id
+     * @return
+     */
+    @GetMapping("/{id}")
+    @ApiOperation("根据id查询菜品和关联的口味数据")
+    public Result<DishVO> getById(@PathVariable Long id) {
+        return Result.success(dishService.getByIdWithFlavor(id));
+    }
+
+    /**
+     * 编辑菜品
+     * @param dishDTO
+     * @return
+     */
+    @PutMapping
+    @ApiOperation("修改菜品")
+    public Result<String> update(@RequestBody DishDTO dishDTO) {
+        dishService.update(dishDTO);
         return Result.success();
     }
 }
