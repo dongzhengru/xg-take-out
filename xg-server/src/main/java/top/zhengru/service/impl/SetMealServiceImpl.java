@@ -12,9 +12,12 @@ import top.zhengru.constant.MessageConstant;
 import top.zhengru.constant.StatusConstant;
 import top.zhengru.dto.SetmealDTO;
 import top.zhengru.dto.SetmealPageQueryDTO;
+import top.zhengru.entity.Dish;
 import top.zhengru.entity.Setmeal;
 import top.zhengru.entity.SetmealDish;
 import top.zhengru.exception.DeletionNotAllowedException;
+import top.zhengru.exception.SetmealEnableFailedException;
+import top.zhengru.mapper.DishMapper;
 import top.zhengru.mapper.SetmealDishMapper;
 import top.zhengru.mapper.SetmealMapper;
 import top.zhengru.result.PageResult;
@@ -35,6 +38,8 @@ public class SetMealServiceImpl implements SetMealService {
     SetmealMapper setmealMapper;
     @Autowired
     SetmealDishMapper setmealDishMapper;
+    @Autowired
+    DishMapper dishMapper;
 
     /**
      * 新增套餐
@@ -117,6 +122,30 @@ public class SetMealServiceImpl implements SetMealService {
         List<SetmealDish> setmealDishes = setmealDTO.getSetmealDishes();
         setmealDishes.forEach(setmealDish -> setmealDish.setSetmealId(setmealId));
         setmealDishMapper.insertBatch(setmealDishes);
+    }
+
+    /**
+     * 套餐起售、停售
+     * @param status
+     * @param id
+     */
+    @Override
+    public void startOrStop(Integer status, Long id) {
+        if(status == StatusConstant.ENABLE){
+            List<Dish> dishList = dishMapper.getBySetmealId(id);
+            if(dishList != null && dishList.size() > 0){
+                dishList.forEach(dish -> {
+                    if(StatusConstant.DISABLE == dish.getStatus()){
+                        throw new SetmealEnableFailedException(MessageConstant.SETMEAL_ENABLE_FAILED);
+                    }
+                });
+            }
+        }
+        Setmeal setmeal = Setmeal.builder()
+                .id(id)
+                .status(status)
+                .build();
+        setmealMapper.update(setmeal);
     }
 
 

@@ -40,4 +40,14 @@
     <select id="list" resultType="top.zhengru.entity.Dish">
         select * from dish where category_id = #{categoryId} and status = #{status}
     </select>
+    <select id="getBySetmealId" resultType="top.zhengru.entity.Dish">
+        select
+            a.*
+        from
+            dish a,setmeal_dish b
+        where
+            a.id = b.dish_id
+          and
+            b.setmeal_id = #{id}
+    </select>
 </mapper>
