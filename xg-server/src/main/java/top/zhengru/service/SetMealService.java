@@ -3,7 +3,9 @@ package top.zhengru.service;
 import org.springframework.stereotype.Service;
 import top.zhengru.dto.SetmealDTO;
 import top.zhengru.dto.SetmealPageQueryDTO;
+import top.zhengru.entity.Setmeal;
 import top.zhengru.result.PageResult;
+import top.zhengru.vo.DishItemVO;
 import top.zhengru.vo.SetmealVO;
 
 import java.util.List;
@@ -53,4 +55,18 @@ public interface SetMealService {
      * @param id
      */
     void startOrStop(Integer status, Long id);
+
+    /**
+     * 条件查询
+     * @param setmeal
+     * @return
+     */
+    List<Setmeal> list(Setmeal setmeal);
+
+    /**
+     * 根据id查询菜品选项
+     * @param id
+     * @return
+     */
+    List<DishItemVO> getDishItemById(Long id);
 }

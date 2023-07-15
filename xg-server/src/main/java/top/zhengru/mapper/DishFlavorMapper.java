@@ -2,6 +2,7 @@ package top.zhengru.mapper;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 import top.zhengru.entity.DishFlavor;
 
 import java.util.List;
@@ -26,4 +27,12 @@ public interface DishFlavorMapper {
      */
     @Delete("delete from dish_flavor where dish_id = #{id}")
     void deleteById(Long id);
+
+    /**
+     * 根据id查询菜品口味
+     * @param id
+     * @return
+     */
+    @Select("select * from dish_flavor where id = #{id};")
+    List<DishFlavor> getByDishId(Long id);
 }

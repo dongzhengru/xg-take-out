@@ -22,6 +22,7 @@ import top.zhengru.mapper.SetmealDishMapper;
 import top.zhengru.mapper.SetmealMapper;
 import top.zhengru.result.PageResult;
 import top.zhengru.service.SetMealService;
+import top.zhengru.vo.DishItemVO;
 import top.zhengru.vo.SetmealVO;
 
 import java.util.List;
@@ -146,6 +147,25 @@ public class SetMealServiceImpl implements SetMealService {
                 .status(status)
                 .build();
         setmealMapper.update(setmeal);
+    }
+
+    /**
+     * 条件查询
+     * @param setmeal
+     * @return
+     */
+    public List<Setmeal> list(Setmeal setmeal) {
+        List<Setmeal> list = setmealMapper.list(setmeal);
+        return list;
+    }
+
+    /**
+     * 根据id查询菜品选项
+     * @param id
+     * @return
+     */
+    public List<DishItemVO> getDishItemById(Long id) {
+        return setmealMapper.getDishItemBySetmealId(id);
     }
 
 
