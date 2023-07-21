@@ -1,5 +1,6 @@
 package top.zhengru.controller.user;
 
+import org.springframework.cache.annotation.Cacheable;
 import top.zhengru.constant.StatusConstant;
 import top.zhengru.entity.Setmeal;
 import top.zhengru.result.Result;
@@ -28,6 +29,7 @@ public class SetmealController {
      * @return
      */
     @GetMapping("/list")
+    @Cacheable(cacheNames = "setmealCache",key = "#categoryId")
     @ApiOperation("根据分类id查询套餐")
     public Result<List<Setmeal>> list(Long categoryId) {
         Setmeal setmeal = new Setmeal();
