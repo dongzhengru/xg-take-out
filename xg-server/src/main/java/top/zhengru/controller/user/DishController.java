@@ -1,5 +1,6 @@
 package top.zhengru.controller.user;
 
+import org.springframework.data.redis.core.RedisTemplate;
 import top.zhengru.constant.StatusConstant;
 import top.zhengru.entity.Dish;
 import top.zhengru.result.Result;
@@ -21,6 +22,8 @@ import java.util.List;
 public class DishController {
     @Autowired
     private DishService dishService;
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     /**
      * 根据分类id查询菜品
@@ -31,12 +34,16 @@ public class DishController {
     @GetMapping("/list")
     @ApiOperation("根据分类id查询菜品")
     public Result<List<DishVO>> list(Long categoryId) {
+        String key = "dish_" + categoryId;
+        List<DishVO> list = (List<DishVO>) redisTemplate.opsForValue().get(key);
+        if (list != null && list.size() > 0) {
+            return Result.success(list);
+        }
         Dish dish = new Dish();
         dish.setCategoryId(categoryId);
         dish.setStatus(StatusConstant.ENABLE);//查询起售中的菜品
-
-        List<DishVO> list = dishService.listWithFlavor(dish);
-
+        list = dishService.listWithFlavor(dish);
+        redisTemplate.opsForValue().set(key, list);
         return Result.success(list);
     }
 
