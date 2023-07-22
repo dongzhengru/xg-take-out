@@ -2,10 +2,12 @@ package top.zhengru.mapper;
 
 import com.github.pagehelper.Page;
 import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import top.zhengru.annotation.AutoFill;
 import top.zhengru.entity.Setmeal;
+import top.zhengru.entity.ShoppingCart;
 import top.zhengru.enumeration.OperationType;
 import top.zhengru.vo.DishItemVO;
 import top.zhengru.vo.SetmealVO;
