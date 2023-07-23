@@ -51,3 +51,10 @@ xg:
   wechat:
     appid: ${xg.wechat.appid}
     secret: ${xg.wechat.secret}
+    mchid: ${xg.wechat.mchid}
+    mchSerialNo: ${xg.wechat.mchSerialNo}
+    privateKeyFilePath: ${xg.wechat.privateKeyFilePath}
+    apiV3Key: ${xg.wechat.apiV3Key}
+    weChatPayCertFilePath: ${xg.wechat.weChatPayCertFilePath}
+    notifyUrl: ${xg.wechat.notifyUrl}
+    refundNotifyUrl: ${xg.wechat.refundNotifyUrl}
