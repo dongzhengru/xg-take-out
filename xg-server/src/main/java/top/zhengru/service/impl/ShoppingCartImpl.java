@@ -47,6 +47,7 @@ public class ShoppingCartImpl implements ShoppingCartService {
             shoppingCart = shoppingCartList.get(0);
             shoppingCart.setNumber(shoppingCart.getNumber() + 1);
             shoppingCartMapper.updateNumberById(shoppingCart);
+            return;
         }
         Long dishId = shoppingCartDTO.getDishId();
         if (dishId != null) {
