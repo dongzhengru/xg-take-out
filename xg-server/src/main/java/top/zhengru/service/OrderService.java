@@ -3,8 +3,10 @@ package top.zhengru.service;
 import org.springframework.stereotype.Service;
 import top.zhengru.dto.OrdersPaymentDTO;
 import top.zhengru.dto.OrdersSubmitDTO;
+import top.zhengru.result.PageResult;
 import top.zhengru.vo.OrderPaymentVO;
 import top.zhengru.vo.OrderSubmitVO;
+import top.zhengru.vo.OrderVO;
 
 /**
  * @Author: dongzhengru
@@ -32,4 +34,20 @@ public interface OrderService {
      * @param outTradeNo
      */
     void paySuccess(String outTradeNo);
+
+    /**
+     * 历史订单查询
+     * @param page
+     * @param pageSize
+     * @param status
+     * @return
+     */
+    PageResult pageQuery4User(int page, int pageSize, Integer status);
+
+    /**
+     * 查询订单详情
+     * @param id
+     * @return
+     */
+    OrderVO details(Long id);
 }

@@ -1,7 +1,9 @@
 package top.zhengru.mapper;
 
+import com.github.pagehelper.Page;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import top.zhengru.dto.OrdersPageQueryDTO;
 import top.zhengru.entity.Orders;
 
 /**
@@ -30,4 +32,19 @@ public interface OrderMapper {
      * @param orders
      */
     void update(Orders orders);
+
+    /**
+     * 分页条件查询
+     * @param ordersPageQueryDTO
+     * @return
+     */
+    Page<Orders> query(OrdersPageQueryDTO ordersPageQueryDTO);
+
+    /**
+     * 根据id查询订单
+     * @param id
+     * @return
+     */
+    @Select("select * from orders where id = #{id};")
+    Orders getById(Long id);
 }

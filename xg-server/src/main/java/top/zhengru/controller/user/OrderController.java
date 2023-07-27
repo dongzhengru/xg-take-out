@@ -7,10 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import top.zhengru.dto.OrdersPaymentDTO;
 import top.zhengru.dto.OrdersSubmitDTO;
+import top.zhengru.result.PageResult;
 import top.zhengru.result.Result;
 import top.zhengru.service.OrderService;
 import top.zhengru.vo.OrderPaymentVO;
 import top.zhengru.vo.OrderSubmitVO;
+import top.zhengru.vo.OrderVO;
 
 /**
  * @Author: dongzhengru
@@ -48,5 +50,31 @@ public class OrderController {
     public Result<OrderPaymentVO> payment(@RequestBody OrdersPaymentDTO ordersPaymentDTO) throws Exception {
         OrderPaymentVO orderPaymentVO = orderService.payment(ordersPaymentDTO);
         return Result.success(orderPaymentVO);
+    }
+
+    /**
+     * 历史订单查询
+     * @param page
+     * @param pageSize
+     * @param status
+     * @return
+     */
+    @GetMapping("/historyOrders")
+    @ApiOperation("历史订单查询")
+    public Result<PageResult> page(int page, int pageSize, Integer status) {
+        PageResult pageResult = orderService.pageQuery4User(page, pageSize, status);
+        return Result.success(pageResult);
+    }
+
+    /**
+     * 查询订单详情
+     * @param id
+     * @return
+     */
+    @GetMapping("/orderDetail/{id}")
+    @ApiOperation("查询订单详情")
+    public Result<OrderVO> details(@PathVariable Long id) {
+        OrderVO orderVO = orderService.details(id);
+        return Result.success(orderVO);
     }
 }
