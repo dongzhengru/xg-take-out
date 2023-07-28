@@ -11,11 +11,10 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import top.zhengru.dto.OrdersConfirmDTO;
 import top.zhengru.dto.OrdersPageQueryDTO;
+import top.zhengru.dto.OrdersRejectionDTO;
 import top.zhengru.result.PageResult;
 import top.zhengru.result.Result;
 import top.zhengru.service.OrderService;
@@ -66,5 +65,27 @@ public class OrderController {
     public Result<OrderVO> details(@PathVariable("id") Long id) {
         OrderVO orderVO = orderService.details(id);
         return Result.success(orderVO);
+    }
+
+    /**
+     * 接单
+     * @return
+     */
+    @PutMapping("/confirm")
+    @ApiOperation("接单")
+    public Result confirm(@RequestBody OrdersConfirmDTO ordersConfirmDTO) {
+        orderService.confirm(ordersConfirmDTO);
+        return Result.success();
+    }
+
+    /**
+     * 拒单
+     * @return
+     */
+    @PutMapping("/rejection")
+    @ApiOperation("拒单")
+    public Result rejection(@RequestBody OrdersRejectionDTO ordersRejectionDTO) throws Exception {
+        orderService.rejection(ordersRejectionDTO);
+        return Result.success();
     }
 }

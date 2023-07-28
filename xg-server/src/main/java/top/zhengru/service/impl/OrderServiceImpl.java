@@ -10,9 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import top.zhengru.constant.MessageConstant;
 import top.zhengru.context.BaseContext;
-import top.zhengru.dto.OrdersPageQueryDTO;
-import top.zhengru.dto.OrdersPaymentDTO;
-import top.zhengru.dto.OrdersSubmitDTO;
+import top.zhengru.dto.*;
 import top.zhengru.entity.*;
 import top.zhengru.exception.AddressBookBusinessException;
 import top.zhengru.exception.OrderBusinessException;
@@ -280,6 +278,46 @@ public class OrderServiceImpl implements OrderService {
         orderStatisticsVO.setConfirmed(confirmed);
         orderStatisticsVO.setDeliveryInProgress(deliveryInProgress);
         return orderStatisticsVO;
+    }
+
+    /**
+     * 接单
+     * @param ordersConfirmDTO
+     */
+    @Override
+    public void confirm(OrdersConfirmDTO ordersConfirmDTO) {
+        Orders orders = Orders.builder()
+                .id(ordersConfirmDTO.getId())
+                .status(Orders.CONFIRMED)
+                .build();
+        orderMapper.update(orders);
+    }
+
+    /**
+     * 拒单
+     * @param ordersRejectionDTO
+     * @throws Exception
+     */
+    @Override
+    public void rejection(OrdersRejectionDTO ordersRejectionDTO) throws Exception {
+        Orders ordersDB = orderMapper.getById(ordersRejectionDTO.getId());
+        if (ordersDB == null || !ordersDB.getStatus().equals(Orders.TO_BE_CONFIRMED)) {
+            throw new OrderBusinessException(MessageConstant.ORDER_STATUS_ERROR);
+        }
+        Integer payStatus = ordersDB.getPayStatus();
+        if (payStatus == Orders.PAID) {
+//            String refund = weChatPayUtil.refund(
+//                    ordersDB.getNumber(),
+//                    ordersDB.getNumber(),
+//                    new BigDecimal(0.01),
+//                    new BigDecimal(0.01));
+        }
+        Orders orders = new Orders();
+        orders.setId(ordersDB.getId());
+        orders.setStatus(Orders.CANCELLED);
+        orders.setRejectionReason(ordersRejectionDTO.getRejectionReason());
+        orders.setCancelTime(LocalDateTime.now());
+        orderMapper.update(orders);
     }
 
     /**
