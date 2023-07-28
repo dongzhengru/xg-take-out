@@ -1,6 +1,7 @@
 package top.zhengru.service;
 
 import org.springframework.stereotype.Service;
+import top.zhengru.dto.OrdersPageQueryDTO;
 import top.zhengru.dto.OrdersPaymentDTO;
 import top.zhengru.dto.OrdersSubmitDTO;
 import top.zhengru.result.PageResult;
@@ -62,4 +63,11 @@ public interface OrderService {
      * @param id
      */
     void repetition(Long id);
+
+    /**
+     * 订单搜索
+     * @param ordersPageQueryDTO
+     * @return
+     */
+    PageResult conditionSearch(OrdersPageQueryDTO ordersPageQueryDTO);
 }
