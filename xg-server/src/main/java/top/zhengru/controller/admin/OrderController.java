@@ -12,6 +12,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import top.zhengru.dto.OrdersPageQueryDTO;
@@ -19,6 +20,7 @@ import top.zhengru.result.PageResult;
 import top.zhengru.result.Result;
 import top.zhengru.service.OrderService;
 import top.zhengru.vo.OrderStatisticsVO;
+import top.zhengru.vo.OrderVO;
 
 /**
  * 订单管理
@@ -52,5 +54,17 @@ public class OrderController {
     public Result<OrderStatisticsVO> statistics() {
         OrderStatisticsVO orderStatisticsVO = orderService.statistics();
         return Result.success(orderStatisticsVO);
+    }
+
+    /**
+     * 订单详情
+     * @param id
+     * @return
+     */
+    @GetMapping("/details/{id}")
+    @ApiOperation("查询订单详情")
+    public Result<OrderVO> details(@PathVariable("id") Long id) {
+        OrderVO orderVO = orderService.details(id);
+        return Result.success(orderVO);
     }
 }
