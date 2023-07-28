@@ -18,6 +18,7 @@ import top.zhengru.dto.OrdersPageQueryDTO;
 import top.zhengru.result.PageResult;
 import top.zhengru.result.Result;
 import top.zhengru.service.OrderService;
+import top.zhengru.vo.OrderStatisticsVO;
 
 /**
  * 订单管理
@@ -40,5 +41,16 @@ public class OrderController {
     public Result<PageResult> conditionSearch(OrdersPageQueryDTO ordersPageQueryDTO) {
         PageResult pageResult = orderService.conditionSearch(ordersPageQueryDTO);
         return Result.success(pageResult);
+    }
+
+    /**
+     * 各个状态的订单数量统计
+     * @return
+     */
+    @GetMapping("/statistics")
+    @ApiOperation("各个状态的订单数量统计")
+    public Result<OrderStatisticsVO> statistics() {
+        OrderStatisticsVO orderStatisticsVO = orderService.statistics();
+        return Result.success(orderStatisticsVO);
     }
 }

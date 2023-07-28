@@ -6,6 +6,7 @@ import top.zhengru.dto.OrdersPaymentDTO;
 import top.zhengru.dto.OrdersSubmitDTO;
 import top.zhengru.result.PageResult;
 import top.zhengru.vo.OrderPaymentVO;
+import top.zhengru.vo.OrderStatisticsVO;
 import top.zhengru.vo.OrderSubmitVO;
 import top.zhengru.vo.OrderVO;
 
@@ -70,4 +71,10 @@ public interface OrderService {
      * @return
      */
     PageResult conditionSearch(OrdersPageQueryDTO ordersPageQueryDTO);
+
+    /**
+     * 各个状态的订单数量统计
+     * @return
+     */
+    OrderStatisticsVO statistics();
 }

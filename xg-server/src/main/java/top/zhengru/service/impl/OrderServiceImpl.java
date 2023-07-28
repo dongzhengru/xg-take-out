@@ -22,6 +22,7 @@ import top.zhengru.result.PageResult;
 import top.zhengru.service.OrderService;
 import top.zhengru.utils.WeChatPayUtil;
 import top.zhengru.vo.OrderPaymentVO;
+import top.zhengru.vo.OrderStatisticsVO;
 import top.zhengru.vo.OrderSubmitVO;
 import top.zhengru.vo.OrderVO;
 
@@ -263,6 +264,22 @@ public class OrderServiceImpl implements OrderService {
         Page<Orders> page = orderMapper.query(ordersPageQueryDTO);
         List<OrderVO> orderVOList = getOrderVOList(page);
         return new PageResult(page.getTotal(), orderVOList);
+    }
+
+    /**
+     * 各个状态的订单数量统计
+     * @return
+     */
+    @Override
+    public OrderStatisticsVO statistics() {
+        Integer toBeConfirmed = orderMapper.countStatus(Orders.TO_BE_CONFIRMED);
+        Integer confirmed = orderMapper.countStatus(Orders.CONFIRMED);
+        Integer deliveryInProgress = orderMapper.countStatus(Orders.DELIVERY_IN_PROGRESS);
+        OrderStatisticsVO orderStatisticsVO = new OrderStatisticsVO();
+        orderStatisticsVO.setToBeConfirmed(toBeConfirmed);
+        orderStatisticsVO.setConfirmed(confirmed);
+        orderStatisticsVO.setDeliveryInProgress(deliveryInProgress);
+        return orderStatisticsVO;
     }
 
     /**
