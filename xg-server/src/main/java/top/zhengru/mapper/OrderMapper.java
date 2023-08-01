@@ -74,4 +74,13 @@ public interface OrderMapper {
      * @return
      */
     Double sumByMap(Map map);
+
+    /**
+     * 条件统计订单数量
+     * @param begin
+     * @param end
+     * @param status
+     * @return
+     */
+    Integer getOrderCount(LocalDateTime begin, LocalDateTime end, Integer status);
 }
