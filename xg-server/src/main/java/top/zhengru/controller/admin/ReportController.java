@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import top.zhengru.result.Result;
 import top.zhengru.service.ReportService;
 import top.zhengru.vo.TurnoverReportVO;
+import top.zhengru.vo.UserReportVO;
 
 import java.time.LocalDate;
 
@@ -30,11 +31,31 @@ public class ReportController {
     @Autowired
     ReportService reportService;
 
+    /**
+     * 营业额统计
+     * @param begin
+     * @param end
+     * @return
+     */
     @GetMapping("/turnoverStatistics")
     @ApiOperation("营业额统计")
     public Result<TurnoverReportVO> turnoverStatistics(
             @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate begin,
             @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate end) {
         return Result.success(reportService.getTurnoverStatistics(begin, end));
+    }
+
+    /**
+     * 用户统计
+     * @param begin
+     * @param end
+     * @return
+     */
+    @GetMapping("/userStatistics")
+    @ApiOperation("用户统计")
+    public Result<UserReportVO> userStatistics(
+            @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate begin,
+            @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate end) {
+        return Result.success(reportService.getUserStatistics(begin, end));
     }
 }
