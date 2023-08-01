@@ -3,6 +3,7 @@ package top.zhengru.mapper;
 import com.github.pagehelper.Page;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import top.zhengru.dto.GoodsSalesDTO;
 import top.zhengru.dto.OrdersPageQueryDTO;
 import top.zhengru.entity.Orders;
 
@@ -83,4 +84,12 @@ public interface OrderMapper {
      * @return
      */
     Integer getOrderCount(LocalDateTime begin, LocalDateTime end, Integer status);
+
+    /**
+     * 查询商品销量排名
+     * @param begin
+     * @param end
+     * @return
+     */
+    List<GoodsSalesDTO> getSalesTop10(LocalDateTime begin, LocalDateTime end);
 }

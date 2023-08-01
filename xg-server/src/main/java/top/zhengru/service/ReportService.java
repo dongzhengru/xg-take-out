@@ -1,6 +1,7 @@
 package top.zhengru.service;
 
 import top.zhengru.vo.OrderReportVO;
+import top.zhengru.vo.SalesTop10ReportVO;
 import top.zhengru.vo.TurnoverReportVO;
 import top.zhengru.vo.UserReportVO;
 
@@ -37,4 +38,12 @@ public interface ReportService {
      * @return
      */
     OrderReportVO getOrderStatistics(LocalDate begin, LocalDate end);
+
+    /**
+     * 查询指定时间区间内的销量排名top10
+     * @param begin
+     * @param end
+     * @return
+     */
+    SalesTop10ReportVO getSalesTop10(LocalDate begin, LocalDate end);
 }

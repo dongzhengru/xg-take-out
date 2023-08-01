@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import top.zhengru.result.Result;
 import top.zhengru.service.ReportService;
 import top.zhengru.vo.OrderReportVO;
+import top.zhengru.vo.SalesTop10ReportVO;
 import top.zhengru.vo.TurnoverReportVO;
 import top.zhengru.vo.UserReportVO;
 
@@ -60,11 +61,31 @@ public class ReportController {
         return Result.success(reportService.getUserStatistics(begin, end));
     }
 
+    /**
+     * 订单统计
+     * @param begin
+     * @param end
+     * @return
+     */
     @GetMapping("/ordersStatistics")
-    @ApiOperation("用户统计")
+    @ApiOperation("订单统计")
     public Result<OrderReportVO> orderStatistics(
             @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate begin,
             @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate end) {
         return Result.success(reportService.getOrderStatistics(begin, end));
+    }
+
+    /**
+     * 销量排名统计
+     * @param begin
+     * @param end
+     * @return
+     */
+    @GetMapping("/top10")
+    @ApiOperation("销量排名统计")
+    public Result<SalesTop10ReportVO> top10(
+            @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate begin,
+            @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate end) {
+        return Result.success(reportService.getSalesTop10(begin, end));
     }
 }
