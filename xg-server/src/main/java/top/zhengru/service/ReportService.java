@@ -5,6 +5,7 @@ import top.zhengru.vo.SalesTop10ReportVO;
 import top.zhengru.vo.TurnoverReportVO;
 import top.zhengru.vo.UserReportVO;
 
+import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDate;
 
 /**
@@ -46,4 +47,10 @@ public interface ReportService {
      * @return
      */
     SalesTop10ReportVO getSalesTop10(LocalDate begin, LocalDate end);
+
+    /**
+     * 导出近30天的运营数据报表
+     * @param response
+     */
+    void exportBusinessData(HttpServletResponse response);
 }
