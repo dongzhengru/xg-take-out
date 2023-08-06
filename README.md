@@ -61,22 +61,22 @@
 
 ### 管理端
 
-![image-20230806152552704](https://github.com/dongzhengru/xg-take-out/assets/image-20230806152552704.png)
+![image-20230806152552704](https://raw.githubusercontent.com/dongzhengru/xg-take-out/master/assets/image-20230806152552704.png)
 
-![image-20230806152617621](https://github.com/dongzhengru/xg-take-out/assets/image-20230806152617621.png)
+![image-20230806152617621](https://raw.githubusercontent.com/dongzhengru/xg-take-out/master/assets/image-20230806152617621.png)
 
-![image-20230806152637190](https://github.com/dongzhengru/xg-take-out/assets/image-20230806152637190.png)
+![image-20230806152637190](https://raw.githubusercontent.com/dongzhengru/xg-take-out/master/assets/image-20230806152637190.png)
 
-![image-20230806152701638](https://github.com/dongzhengru/xg-take-out/assets/image-20230806152701638.png)
+![image-20230806152701638](https://raw.githubusercontent.com/dongzhengru/xg-take-out/master/assets/image-20230806152701638.png)
 
-![image-20230806152945862](https://github.com/dongzhengru/xg-take-out/assets/image-20230806152945862.png)
+![image-20230806152945862](https://raw.githubusercontent.com/dongzhengru/xg-take-out/master/assets/image-20230806152945862.png)
 
 ### 用户端
 
-![image-20230806152814530](https://github.com/dongzhengru/xg-take-out/assets/image-20230806152814530.png)
+![image-20230806152814530](https://raw.githubusercontent.com/dongzhengru/xg-take-out/master/assets/image-20230806152814530.png)
 
-![image-20230806152837950](https://github.com/dongzhengru/xg-take-out/assets/image-20230806152837950.png)
+![image-20230806152837950](https://raw.githubusercontent.com/dongzhengru/xg-take-out/master/assets/image-20230806152837950.png)
 
-![image-20230806152859884](https://github.com/dongzhengru/xg-take-out/assets/image-20230806152859884.png)
+![image-20230806152859884](https://raw.githubusercontent.com/dongzhengru/xg-take-out/master/assets/image-20230806152859884.png)
 
-![image-20230806153019100](https://github.com/dongzhengru/xg-take-out/assets/image-20230806153019100.png)
+![image-20230806153019100](https://raw.githubusercontent.com/dongzhengru/xg-take-out/master/assets/image-20230806153019100.png)
