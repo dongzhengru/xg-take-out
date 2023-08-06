@@ -5,9 +5,19 @@ xg:
     port: 3307
     database: xg_take_out
     username: root
-    password: 123456
+    password:
   alioss:
     access-key-id: xxx
     access-key-secret: xxx
     bucket-name: xxx
     endpoint: oss-cn-hangzhou.aliyuncs.com
+  wechat:
+    appid:
+    secret:
+    mchid:
+    mchSerialNo:
+    privateKeyFilePath:
+    apiV3Key:
+    weChatPayCertFilePath:
+    notifyUrl:
+    refundNotifyUrl:
